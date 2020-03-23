@@ -16,6 +16,12 @@ func getRegisterFlags() []cli.Flag {
 			Usage:    "Name of the user.",
 			Required: true,
 		},
+		&cli.StringFlag{
+			Name:     "host",
+			Aliases:  []string{"H"},
+			Usage:    "Host address for tasker server",
+			Required: true,
+		},
 	}
 }
 
@@ -27,9 +33,17 @@ func RegisterIt(c *cli.Context) error {
 		fmt.Printf("%s", err)
 		os.Exit(1)
 	}
+
+	host := c.String("host")
+	err = conf.SetHost(host)
+	if err != nil {
+		fmt.Println("host not set")
+		os.Exit(1)
+	}
+
 	fmt.Print("\n")
 	fmt.Println("--------")
-	fmt.Println("User Changed To: " + username)
+	fmt.Println("User settings have been updated")
 	fmt.Println("--------")
 	fmt.Print("\n")
 	return err

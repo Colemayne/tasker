@@ -62,6 +62,20 @@ func ListIt(c *cli.Context) error {
 	}
 
 	var conf common.TaskerConfig
+	err := conf.LoadConfig()
+	if err != nil {
+		fmt.Printf("%s", err)
+		os.Exit(1)
+	}
+	if conf.GetUsername() == "" {
+		fmt.Print("\n")
+		fmt.Println("--------")
+		fmt.Println("Please set a username")
+		fmt.Println("Run the register command")
+		fmt.Println("--------")
+		fmt.Print("\n")
+		os.Exit(1)
+	}
 	response, err := http.Get("http://localhost:8081/api/tasker/v1/select/" + conf.GetUsername())
 	if err != nil {
 		fmt.Printf("%s", err)
