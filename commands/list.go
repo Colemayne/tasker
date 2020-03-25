@@ -76,7 +76,7 @@ func ListIt(c *cli.Context) error {
 		fmt.Print("\n")
 		os.Exit(1)
 	}
-	response, err := http.Get("http://localhost:8081/api/tasker/v1/select/" + conf.GetUsername())
+	response, err := http.Get(conf.GetHost() + "/api/tasker/v1/select/" + conf.GetUsername())
 	if err != nil {
 		fmt.Printf("%s", err)
 		os.Exit(1)

@@ -28,7 +28,7 @@ func ClaimIt(c *cli.Context) error {
 		if err != nil {
 			log.Fatalln(err)
 		}
-		response, err := http.Post("http://localhost:8081/api/tasker/v1/claim", "application/json", bytes.NewBuffer(bytesRepresentation))
+		response, err := http.Post(conf.GetHost()+"/api/tasker/v1/claim", "application/json", bytes.NewBuffer(bytesRepresentation))
 
 		if err != nil {
 			fmt.Printf("%s", err)

@@ -78,3 +78,10 @@ func (c *TaskerConfig) SetHost(host string) error {
 	err := writeConfig(c)
 	return err
 }
+
+// GetHost returns the host as found in the config.
+func (c *TaskerConfig) GetHost() string {
+	data := readConfig()
+	json.Unmarshal([]byte(data), &c)
+	return c.Host
+}

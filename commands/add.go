@@ -47,7 +47,7 @@ func AddIt(c *cli.Context) error {
 			log.Fatalln(err)
 		}
 
-		response, err := http.Post("http://localhost:8081/api/tasker/v1/save", "application/json", bytes.NewBuffer(bytesRepresentation))
+		response, err := http.Post(conf.GetHost()+"/api/tasker/v1/save", "application/json", bytes.NewBuffer(bytesRepresentation))
 		if err != nil {
 			fmt.Printf("%s", err)
 			os.Exit(1)
